@@ -62,32 +62,36 @@ The objective is to understand:
 ## 🐳 What Has Been Learned So Far
 
 ### 1️⃣ Docker Fundamentals
+
 - Images vs Containers
 - Container lifecycle
 - Layered filesystem concept
 - Ephemeral container behavior
 
 **Key realization:**  
-*Containers are temporary. Data must not live inside them.*
+_Containers are temporary. Data must not live inside them._
 
 ### 2️⃣ Docker Networking
+
 - Internal Docker networks
 - Service name DNS resolution
 - Why localhost fails between containers
 - Container-to-container communication
 
 ### 3️⃣ Docker Compose
+
 - Multi-service orchestration
 - `depends_on` limitations
 - Startup order vs service readiness
 - Debugging real startup failures
 
 **Important lesson:**  
-*`depends_on` != application readiness*
+_`depends_on` != application readiness_
 
 ### 4️⃣ Debugging Experience (Real Learning)
 
 Encountered and solved issues such as:
+
 - API starting before database readiness
 - Incorrect internal networking assumptions
 - Container restart failures
@@ -95,13 +99,21 @@ Encountered and solved issues such as:
 
 Focus was placed on understanding **root causes**, not quick fixes.
 
-### 5️⃣ Persistence (Current Stage)
+### 5️⃣ Persistence
 
 Learning how production systems preserve state:
+
 - Named volumes
 - Data survival after container removal
 - Difference between bind mounts and volumes
 - Why persistence is critical in real environments
+
+### 6️⃣ Health & Readiness (Current Stage)
+
+- Implemented `/health/live` and `/health/ready`
+- Integrated Docker healthcheck with API readiness
+- System can now detect dependency availability (PostgreSQL)
+- Enables production-like service monitoring behavior
 
 ---
 

@@ -4,6 +4,8 @@ const { Client } = require("pg");
 const app = express();
 
 let client;
+let isDbConnected = false;
+let maxDelay = 30000
 
 async function connectWithRetry() {
   let delay = 2000
@@ -19,11 +21,13 @@ async function connectWithRetry() {
       await client.connect();
 
       console.log("Connected to Postgres");
+      isDbConnected = true;
       break;
     } catch (err) {
+      isDbConnected = false;
       console.log(`DB not ready, retrying in ${delay}ms...`);
       await new Promise(res => setTimeout(res, delay));
-      delay = Math.min(delay * 2, 30000)
+      delay = Math.min(delay * 2, maxDelay)
     }
   }
 }
@@ -37,10 +41,17 @@ app.get("/", async (req, res) => {
   }
 });
 
-client.on("error", async () => {
-  console.log("Lost DB connection. Reconnecting...");
-  await connectWithRetry();
-});
+app.get("/health/live", (req, res) => {
+  res.status(200).send("OK")
+})
+
+app.get("/health/ready", (req, res) => {
+  if (isDbConnected) {
+      res.status(200).send("Ready")
+    } else {
+      res.status(500).send("Not Ready")
+    }
+})
 
 async function start() {
   await connectWithRetry();
@@ -50,4 +61,9 @@ async function start() {
   });
 }
 start();
+
+client.on("error", async () => {
+  console.log("Lost DB connection. Reconnecting...");
+  await connectWithRetry();
+});
 
