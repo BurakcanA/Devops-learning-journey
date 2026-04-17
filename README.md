@@ -61,7 +61,7 @@ The objective is to understand:
 
 ## 🐳 What Has Been Learned So Far
 
-### 1️⃣ Docker Fundamentals
+### 1 Docker Fundamentals
 
 - Images vs Containers
 - Container lifecycle
@@ -71,14 +71,14 @@ The objective is to understand:
 **Key realization:**  
 _Containers are temporary. Data must not live inside them._
 
-### 2️⃣ Docker Networking
+### 2 Docker Networking
 
 - Internal Docker networks
 - Service name DNS resolution
 - Why localhost fails between containers
 - Container-to-container communication
 
-### 3️⃣ Docker Compose
+### 3 Docker Compose
 
 - Multi-service orchestration
 - `depends_on` limitations
@@ -88,7 +88,7 @@ _Containers are temporary. Data must not live inside them._
 **Important lesson:**  
 _`depends_on` != application readiness_
 
-### 4️⃣ Debugging Experience (Real Learning)
+### 4 Debugging Experience (Real Learning)
 
 Encountered and solved issues such as:
 
@@ -99,7 +99,7 @@ Encountered and solved issues such as:
 
 Focus was placed on understanding **root causes**, not quick fixes.
 
-### 5️⃣ Persistence
+### 5 Persistence
 
 Learning how production systems preserve state:
 
@@ -108,12 +108,20 @@ Learning how production systems preserve state:
 - Difference between bind mounts and volumes
 - Why persistence is critical in real environments
 
-### 6️⃣ Health & Readiness (Current Stage)
+### 6 Health & Readiness (Current Stage)
 
 - Implemented `/health/live` and `/health/ready`
 - Integrated Docker healthcheck with API readiness
 - System can now detect dependency availability (PostgreSQL)
 - Enables production-like service monitoring behavior
+
+### 7 CI Pipeline
+
+- Implemented GitHub Actions CI pipeline
+- Builds Docker containers
+- Runs multi-service environment using Docker Compose
+- Performs health checks on API readiness
+- Ensures system works as a whole (API + DB)
 
 ---
 
