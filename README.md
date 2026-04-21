@@ -123,6 +123,13 @@ Learning how production systems preserve state:
 - Performs health checks on API readiness
 - Ensures system works as a whole (API + DB)
 
+### 8 Docker Image Versioning
+
+- Images are tagged with:
+- `latest` (most recent build)
+- Git commit SHA (immutable version)
+- Enables rollback and traceability
+
 ---
 
 ## 🧪 Learning Method
